@@ -55,7 +55,6 @@ angular.module('app.pages', [])
                 });
                 fs =  firebase.firestore().collection('q2d1');
                 fc =  firebase.firestore().collection('q2dc');
-                setupVisualisationBoard();
             }
 
             vm.gotoNextPage = function () {
@@ -72,6 +71,10 @@ angular.module('app.pages', [])
                             vm.currentPage = -1;
                         });
                      fc.add(vm.data)
+                    .then((ref) => {
+                        vm.currentPage = -1;
+                    });
+                fc.add(vm.data)
                     .then((ref) => {
                         vm.currentPage = -1;
                     });
