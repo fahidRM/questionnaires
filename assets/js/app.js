@@ -1,88 +1,86 @@
-$( document ).ready(function() {
-    console.log( "ready!" );
+angular.module("questionnaire-page", [
+    'app.pages'
+]);
 
-
-    $("#1_01_a").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_01.png");
-		 return false;
-	});
-
-
-    $("#1_01_b").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_02.png");
-		 return false;
-	});
-
-
-    $("#1_01_c").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_02.png");
-		 return false;
-	});
-
-	$("#1_01_d").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_03.png");
-		 return false;
-	});
-
-	$("#1_01_e").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_04.png");
-		 return false;
-	});
-
-	$("#1_01_f").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_05.png");
-		 return false;
-	});
-
-	$("#1_01_g").on("click",  function() {
-		 $("#q1").attr("src", "assets/img/grid/1_05.png");
-		 return false;
-	});
-
-
-	$("#b1_01_a").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_01.png");
-		 return false;
-	});
-
-
-    $("#b1_01_b").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_02.png");
-		 return false;
-	});
-
-
-    $("#b1_01_c").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_02.png");
-		 return false;
-	});
-
-	$("#b1_01_d").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_03.png");
-		 return false;
-	});
-
-	$("#b1_01_e").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_04.png");
-		 return false;
-	});
-
-	$("#b1_01_f").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_05.png");
-		 return false;
-	});
-
-	$("#b1_01_g").on("click",  function() {
-		 $("#qb").attr("src", "assets/img/grid/1_05.png");
-		 return false;
-	});
+angular.module('app.pages', [])
+    .controller(
+        'QuestionnairePage', [ '$scope', function ($scope) {
 
 
 
-    /*$("#1_01_a").click(function() {
-    	alert("01");
-    	return false;
-    })*/
+            let vm =  this;
+            vm.currentPage =  0;
+            vm.data = {
+                demographics: {
+                    age: "",
+                    education: "",
+                    gender: "",
+                    occupation: ""
+                },
+                responses: {
+                    a: {
+                        a: "",
+                        b: "",
+                        c: "",
+                        d: "",
+                        e: "",
+                        f: ""
+                    },
+                    b: {
+                        a: "",
+                        b: "",
+                        c: "",
+                        d: "",
+                        e: "",
+                        f: ""
+                    },
+                }
+            };
+            vm.submitted =  false;
+            let fs = ""
 
 
-});
+
+
+
+            vm.init =  function () {
+                firebase.initializeApp({
+                    apiKey: "AIzaSyBkGWOoapULGVXikcwkzQxpR_BZ-y-9ndI",
+                    authDomain: "researchquestionnaireset2.firebaseapp.com",
+                    projectId: "researchquestionnaireset2",
+                    storageBucket: "researchquestionnaireset2.appspot.com",
+                    messagingSenderId: "75203192387",
+                    appId: "1:75203192387:web:ae9913848a32864c9596f6"
+                });
+                fs =  firebase.firestore().collection('test2');
+                setupVisualisationBoard();
+            }
+
+            vm.gotoNextPage = function () {
+                vm.currentPage ++;
+            }
+
+            vm.gotoPrevPage = function () {
+                vm.currentPage --;
+            }
+
+            vm.submit =  function () {
+                        fs.add(vm.data)
+                        .then((ref) => {
+                            vm.currentPage = -1;
+                        });
+                     fs.add(vm.data)
+                    .then((ref) => {
+                        vm.currentPage = -1;
+                    });
+                vm.currentPage = -1;
+            }
+
+
+
+
+
+        }]
+    )
+
+

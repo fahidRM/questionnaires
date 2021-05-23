@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>[PhD] Questionnaire </title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+
+    <style>
+        .show {
+            display: block !important;
+        }
+        .hidden {
+            display: none !important;
+            visibility: hidden !important;
+        }
+    </style>
+</head>
+
+<body style="height: 100vh !important" ng-app="questionnaire-page" ng-controller="QuestionnairePage as page" ng-init="page.init()">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container">
+            <a class="navbar-brand logo" href="#">Questionnaire</a>
+        </div>
+    </nav>
+
+    <main class="page cv-page">
+        <section class="portfolio-block block-intro" ng-show="page.currentPage == -1">
+            <div class="container">
+                <div class="about-me">
+                    <p>
+                        Thank You!!! <br>
+                        Your response has been submitted successfully.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="portfolio-block block-intro" ng-show="page.currentPage == 0">
+            <div class="container">
+                <div class="about-me">
+                    <p>
+                        Thanks again for choosing to participate in this study.
+                        <br>
+                        <br>
+                        Instructions:
+                        <br>
+                        This study investigates the effectiveness of visual explanations and is divided in to two sections.
+                        In the first section, you are presented with a hypothetical scenario where an intelligent system
+                        acting on your behalf has performed some tasks and presented you with a visual justification.
+                        Your task is to interact with the provided justification and answer a few questions regarding its quality.
+                        <br>
+                        In the second section you'll be provided another set of visual explanations to discuss.
+                        <br><br>
+                    </p>
+                    <div class="links"></div><button class="btn btn-success " type="button" ng-click="page.gotoNextPage()">Start Questionnaire</button>
+                </div>
+            </div>
+        </section>
+        <section class="portfolio-block cv">
+            <div class="container">
+                <div class="work-experience group" ng-show="page.currentPage == 1">
+                    <div class="row">
+                        <h3 class="text-muted">Demographics</h3><br><Br>
+                    </div>
+                    <div class="item">
+                        <p class="text-muted">
+                            All submissions on this form are anonymous though we will need a few information about your gender, age group and educational status.
+                            <b>You may also choose to not reply by selecting the option "I'd rather not say"</b>.
+                        </p>
+                        <table>
+                            <thead>
+                            <th colspan="10"></th>
+                            <th colspan="7" ></th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="padding-right:7px">Gender</td>
+                                <td class="float-right"><select ng-model="page.data.demographics.gender">
+                                    <option>Female</option>
+                                    <option>Male</option>
+                                    <option>Other</option>
+                                    <option>I'd rather not say</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>Educational Qualification</td>
+                                <td class="float-right"><select ng-model="page.data.demographics.education">
+                                    <option>Undergraduate</option>
+                                    <option>Postgraduate</option>
+                                    <option>Other</option>
+                                    <option>I'd rather not say</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>Age Range</td>
+                                <td class="float-right"><select ng-model="page.data.demographics.age">
+                                    <option>18 - 24</option>
+                                    <option>25 - 29</option>
+                                    <option>30 - 34</option>
+                                    <option>35 - 39</option>
+                                    <option>40 - 44</option>
+                                    <option>45 - 49</option>
+                                    <option>50 - 54</option>
+                                    <option>55 - 59</option>
+                                    <option>60 - 64</option>
+                                    <option>65 - 69</option>
+                                    <option>70 - 74</option>
+                                    <option>75 - 79</option>
+                                    <option>80 - 84</option>
+                                    <option>I'd rather not say</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right:12px">Occupation / Field of Study</td>
+                                <td class="float-right">
+                                    <input type="text" ng-model="page.data.demographics.occupation">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2">
+                                <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoPrevPage()">Instructions</button>
+                            </div>
+                            <div class="col-2">
+                                <div class="links"></div><button class="btn btn-success" type="button" ng-click="page.gotoNextPage()">Proceed</button>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="work-experience group" ng-show="page.currentPage == 2">
+                    <div class="row">
+                        <h3 class="text-muted">Question 1</h3><br><Br>
+                    </div>
+                    <div class="item">
+                        <p class="text-muted">
+                            <b>Scenario:</b>&nbsp; Your employer has recently  introduced a smart calendar to help improve meeting attendance.
+                            A smart calendar may reschedule your events in advance and provides an interactive visualisation to explain its actions (as shown below).
+                            <br><br>
+                            <b>Event:&nbsp;&nbsp;</b> On Friday, you had scheduled your Monday appointments as follows:
+                            <br>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>10:00am</td>
+                                    <td>-</td>
+                                    <td>11:00am:</td>
+                                    <td style="padding-left: 15px">Meeting with Selena &amp; Alison</td>
+                                </tr>
+                                <tr>
+                                    <td>1:00pm</td>
+                                    <td>-</td>
+                                    <td>3:00pm:</td>
+                                    <td style="padding-left: 15px">Meeting with Chelsea &amp; Derek</td>
+                                </tr>
+                                <tr>
+                                    <td>4:00pm</td>
+                                    <td>-</td>
+                                    <td>5:00pm:</td>
+                                    <td style="padding-left: 15px">Meeting with Alice &amp; Bob</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br>On Monday, your calendar had been rescheduled as follows:<br>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>9:00am</td>
+                                    <td>-</td>
+                                    <td>10:00am:</td>
+                                    <td style="padding-left: 15px">Meeting with Alice &amp; Bob</td>
+                                </tr>
+                                <tr>
+                                    <td>10:00am</td>
+                                    <td>-</td>
+                                    <td>11:00am:</td>
+                                    <td style="padding-left: 15px">Meeting with Selena &amp; Alison</td>
+                                </tr>
+                                <tr>
+                                    <td>1:00pm</td>
+                                    <td>-</td>
+                                    <td>3:00pm:</td>
+                                    <td style="padding-left: 15px">Meeting with Chelsea &amp; Derek</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br> The justification provided by your calender is presented below:<br><br>
+                            <b>
+                                Important: The visualisation is interactive, the nodes represent actions taken by the calender.
+                                The red nodes represent actions that were not possible at the time of decision making.
+                                Clicking on a node shows the information available to the calendar at the point of its decision
+                                making (This appears on the left of the screen).<br><br>
+                            </b><br>
+                            <b>
+                                Green Nodes: When on the middle line, they represent actions your calendar performed<br>
+                                Green Nodes: When not on the middle line, they represent actions available to your calendar that were not explored.<br>
+                                Red Nodes: Represents actions options available to your calendar that could not be performed.<br>
+
+                            </b>
+                        <div class="">
+                            <img src="assets/img/grid/1_01.png" id="q1" width="800" usemap="#img_01">
+                            <map name="img_01">
+                                <area shape="circle" coords="170,240,30" id="1_01_a" href="">
+                                <area shape="circle" coords="270,240,30" id="1_01_b" href="google.com">
+                                <area shape="circle" coords="270,340,30" id="1_01_c" href="google.com">
+                                <area shape="circle" coords="390,240,30" id="1_01_d" href="google.com">
+                                <area shape="circle" coords="520,240,30" id="1_01_e" href="google.com">
+                                <area shape="circle" coords="635,240,30" id="1_01_f" href="google.com">
+                                <area shape="circle" coords="635,340,30" id="1_01_g" href="google.com">
+                            </map>
+                        </div>
+                        <br>
+                        <Br>
+                        <table>
+                            <thead>
+                            <th colspan="5"></th>
+                            <th colspan="2"></th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>The visualisation helps me understand how the tool works</td>
+                                <td><select ng-model="page.data.responses.a.a">
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation of how the Agent works is satisfying</td>
+                                <td><select ng-model="page.data.responses.a.b">
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation is sufficiently detailed</td>
+                                <td><select ng-model="page.data.responses.a.c">
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation seems complete</td>
+                                <td><select ng-model="page.data.responses.a.d">
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation of how the tool works tells me how to use it</td>
+                                <td><select ng-model="page.data.responses.a.e">
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The tool was helpful in allowing me to quickly understanding the reasons for the outcome</td>
+                                <td>
+                                    <select ng-model="page.data.responses.a.f">
+                                        <option>Strongly Disagree</option>
+                                        <option>Disagree</option>
+                                        <option>Neutral</option>
+                                        <option>Agree</option>
+                                        <option>Strongly Agree</option>
+                                    </select>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-2">
+                            <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoPrevPage()">Back</button>
+                        </div>
+                        <div class="col-2">
+                            <div class="links"></div><button class="btn btn-success" type="button" ng-click="page.gotoNextPage()">Proceed</button>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </div>
+                <div class="work-experience group" ng-show="page.currentPage == 3">
+                    <div class="row">
+                        <h3 class="text-muted"> Question 2</h3><br><Br>
+                    </div>
+                    <div class="item">
+                        <p class="text-muted">
+                            <b>Scenario 2:</b> You have asked a service robot to fetch you some coffee. For its activities, it has provided
+                            you with the justification (visualisation) below. Kindly interact with the justification provided and answer the questions
+                            below.
+                        </p><b>
+                            Important: The visualisation is interactive, the nodes represent actions taken by the calender.
+                            The red nodes represent actions that were not possible at the time of decision making.
+                            Clicking on a node shows the information available to the calendar at the point of its decision
+                            making (This appears on the left of the screen).<br><br>
+                        </b>
+                        <div class="row">
+                            <img src="assets/img/grid/1_01.png" id="qb" width="800" usemap="#bimg_01">
+                            <map name="bimg_01">
+                                <area shape="circle" coords="170,240,30" id="b1_01_a" href="">
+                                <area shape="circle" coords="270,240,30" id="b1_01_b" href="google.com">
+                                <area shape="circle" coords="270,340,30" id="b1_01_c" href="google.com">
+                                <area shape="circle" coords="390,240,30" id="b1_01_d" href="google.com">
+                                <area shape="circle" coords="520,240,30" id="b1_01_e" href="google.com">
+                                <area shape="circle" coords="635,240,30" id="b1_01_f" href="google.com">
+                                <area shape="circle" coords="635,340,30" id="b1_01_g" href="google.com">
+                            </map>
+
+                        </div>
+                        <br>
+                        <br>
+                        <table>
+                            <thead>
+                            <th colspan="5"></th>
+                            <th colspan="2"></th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>The visualisation helps me understand how the tool works</td>
+                                <td><select>
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation of how the Agent works is satisfying</td>
+                                <td><select>
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation is sufficiently detailed</td>
+                                <td><select>
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation seems complete</td>
+                                <td><select>
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The visualisation of how the tool works tells me how to use it</td>
+                                <td><select>
+                                    <option>Strongly Disagree</option>
+                                    <option>Disagree</option>
+                                    <option>Neutral</option>
+                                    <option>Agree</option>
+                                    <option>Strongly Agree</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>The tool was helpful in allowing me to quickly understanding the reasons for the outcome</td>
+                                <td>
+                                    <select>
+                                        <option>Strongly Disagree</option>
+                                        <option>Disagree</option>
+                                        <option>Neutral</option>
+                                        <option>Agree</option>
+                                        <option>Strongly Agree</option>
+                                    </select>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-5"></div>
+                        <div class="col-2">
+                            <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoPrevPage()">Back</button>
+                        </div>
+                        <div class="col-2">
+                            <div class="links"></div><button class="btn btn-success" type="button" ng-click="page.submit()">Submit</button>
+                        </div>
+                        <div class="col-5"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+
+        $("#1_01_a").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_01.png");
+            return false;
+        });
+
+
+        $("#1_01_b").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_02.png");
+            return false;
+        });
+
+
+        $("#1_01_c").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_02.png");
+            return false;
+        });
+
+        $("#1_01_d").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_03.png");
+            return false;
+        });
+
+        $("#1_01_e").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_04.png");
+            return false;
+        });
+
+        $("#1_01_f").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_05.png");
+            return false;
+        });
+
+        $("#1_01_g").on("click",  function() {
+            $("#q1").attr("src", "assets/img/grid/1_05.png");
+            return false;
+        });
+
+
+        $("#b1_01_a").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_01.png");
+            return false;
+        });
+
+
+        $("#b1_01_b").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_02.png");
+            return false;
+        });
+
+
+        $("#b1_01_c").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_02.png");
+            return false;
+        });
+
+        $("#b1_01_d").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_03.png");
+            return false;
+        });
+
+        $("#b1_01_e").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_04.png");
+            return false;
+        });
+
+        $("#b1_01_f").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_05.png");
+            return false;
+        });
+
+        $("#b1_01_g").on("click",  function() {
+            $("#qb").attr("src", "assets/img/grid/1_05.png");
+            return false;
+        });
+
+
+    </script>
+
+</body>
+
+</html>

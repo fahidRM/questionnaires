@@ -1,0 +1,85 @@
+$( document ).ready(function() {
+
+	// next next submit
+
+
+
+
+	const PAGE_COUNT = 3;
+
+	let currentPage = 0;
+
+
+
+	function gotoNextPage () {
+		if (currentPage < PAGE_COUNT) {
+			currentPage ++;
+			refreshPage();
+		}
+	}
+
+	function gotoPreviousPage () {
+		if (currentPage > 1) {
+			currentPage --;
+			refreshPage();
+		}
+	}
+
+
+	function refreshPage () {
+		$(".page").addClass("hidden");
+		$(".page").removeClass("show");
+		$("#page-" + currentPage).addClass("show");
+		$("#page-" + currentPage).removeClass("hidden");
+	}
+
+
+
+
+
+
+
+
+	console.log( "ready!" );
+
+
+
+
+
+
+	$('.next-button').on('click', function() {
+		gotoNextPage();
+	});
+
+	$('.prev-button').on('click', function() {
+		gotoPreviousPage();
+	});
+
+	$('btn-submit').on('click', function () {
+		//submit ...
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
