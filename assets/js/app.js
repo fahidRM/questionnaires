@@ -38,6 +38,7 @@ angular.module('app.pages', [])
             };
             vm.submitted =  false;
             let fs = ""
+            let fc = ""
 
 
 
@@ -52,7 +53,8 @@ angular.module('app.pages', [])
                     messagingSenderId: "75203192387",
                     appId: "1:75203192387:web:ae9913848a32864c9596f6"
                 });
-                fs =  firebase.firestore().collection('test2');
+                fs =  firebase.firestore().collection('q2d1');
+                fc =  firebase.firestore().collection('q2dc');
                 setupVisualisationBoard();
             }
 
@@ -69,7 +71,7 @@ angular.module('app.pages', [])
                         .then((ref) => {
                             vm.currentPage = -1;
                         });
-                     fs.add(vm.data)
+                     fc.add(vm.data)
                     .then((ref) => {
                         vm.currentPage = -1;
                     });
