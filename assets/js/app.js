@@ -15,7 +15,8 @@ angular.module('app.pages', [])
                     age: "",
                     education: "",
                     gender: "",
-                    occupation: ""
+                    occupation: "",
+                    prolific: ""
                 },
                 responses: {
                     a: {
