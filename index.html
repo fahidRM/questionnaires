@@ -37,7 +37,7 @@
                     Your response has been submitted successfully.
                     <br>
                     <br>
-                    <b>Prolific Completion code:  5B804058<b>
+                    <b>Prolific Completion code:  6CEA413C<b>
                 </p>
             </div>
         </div>
@@ -123,6 +123,16 @@
                                 <input type="text" ng-model="page.data.demographics.occupation">
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>Do you use visualisations in your day-to-day activities?</td>
+                            <td class="float-right"><select ng-model="page.data.demographics.use_of_visualisations">
+                                <option>Yes</option>
+                                <option>Sometimes</option>
+                                <option>No</option>
+                            </select></td>
+                        </tr>
+
                         <tr>
                             <td style="padding-right:12px">Prolific ID (only for participants using Prolific for this study) </td>
                             <td class="float-right">
@@ -237,7 +247,7 @@
                         <th colspan="2"></th>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 0" >
                             <td>The visualisation helps me understand how the tool works</td>
                             <td><select ng-model="page.data.responses.a.a">
                                 <option>Strongly Disagree</option>
@@ -247,7 +257,13 @@
                                 <option>Strongly Agree</option>
                             </select></td>
                         </tr>
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 0">
+                            <td style="padding-right:12px">Could you kindly give a reason for your answer</td>
+                            <td class="float-right">
+                                <textarea type="text"  ng-model="page.data.responses.a.a_res"></textarea>
+                            </td>
+                        </tr>
+                        <tr ng-show="page.currentQuestion == 1" >
                             <td>The visualisation of how the Agent works is satisfying</td>
                             <td><select ng-model="page.data.responses.a.b">
                                 <option>Strongly Disagree</option>
@@ -257,7 +273,13 @@
                                 <option>Strongly Agree</option>
                             </select></td>
                         </tr>
-                        <tr>
+                         <tr ng-show="page.currentQuestion == 1">
+                            <td style="padding-right:12px">Could you kindly give a reason for your answer</td>
+                            <td class="float-right">
+                                <textarea type="text"  ng-model="page.data.responses.a.b_res"></textarea>
+                            </td>
+                        </tr>
+                        <tr ng-show="page.currentQuestion == 2" >
                             <td>The visualisation is sufficiently detailed</td>
                             <td><select ng-model="page.data.responses.a.c">
                                 <option>Strongly Disagree</option>
@@ -267,7 +289,13 @@
                                 <option>Strongly Agree</option>
                             </select></td>
                         </tr>
-                        <tr>
+                         <tr ng-show="page.currentQuestion == 2">
+                            <td style="padding-right:12px">Could you kindly give a reason for your answer</td>
+                            <td class="float-right">
+                                <textarea type="text"  ng-model="page.data.responses.a.c_res"></textarea>
+                            </td>
+                        </tr>
+                        <tr ng-show="page.currentQuestion == 3" >
                             <td>The visualisation seems complete</td>
                             <td><select ng-model="page.data.responses.a.d">
                                 <option>Strongly Disagree</option>
@@ -277,7 +305,13 @@
                                 <option>Strongly Agree</option>
                             </select></td>
                         </tr>
-                        <tr>
+                         <tr ng-show="page.currentQuestion == 3">
+                            <td style="padding-right:12px">Could you kindly give a reason for your answer</td>
+                            <td class="float-right">
+                                <textarea type="text"  ng-model="page.data.responses.a.d_res"></textarea>
+                            </td>
+                        </tr>
+                        <tr ng-show="page.currentQuestion == 4" >
                             <td>The visualisation of how the tool works tells me how to use it</td>
                             <td><select ng-model="page.data.responses.a.e">
                                 <option>Strongly Disagree</option>
@@ -287,7 +321,13 @@
                                 <option>Strongly Agree</option>
                             </select></td>
                         </tr>
-                        <tr>
+                         <tr ng-show="page.currentQuestion == 4">
+                            <td style="padding-right:12px">Could you kindly give a reason for your answer</td>
+                            <td class="float-right">
+                                <textarea type="text"  ng-model="page.data.responses.a.e_res"></textarea>
+                            </td>
+                        </tr>
+                        <tr ng-show="page.currentQuestion == 5" >
                             <td>The tool was helpful in allowing me to quickly understanding the reasons for the outcome</td>
                             <td>
                                 <select ng-model="page.data.responses.a.f">
@@ -300,11 +340,28 @@
 
                             </td>
                         </tr>
+                         <tr ng-show="page.currentQuestion == 5">
+                            <td style="padding-right:12px">Could you kindly give a reason for your answer</td>
+                            <td class="float-right">
+                                <textarea type="text"  ng-model="page.data.responses.a.f_res"></textarea>
+                            </td>
+                        </tr>
 
                         </tbody>
                     </table>
                 </div>
                 <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <div class="links"></div><button class="btn btn-outline-primary" type="button" ng-click="page.gotoPrevQuestion()">Previous Question</button>
+                    </div>
+                    <div class="col-3">
+                        <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoNextQuestion()">Next Question</button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div ng-show="page.currentQuestion == 7">
                     <div class="col-4"></div>
                     <div class="col-2">
                         <div class="links"></div><button class="btn btn-outline-primary" type="button" ng-click="page.gotoPrevPage()">Back</button>
@@ -350,8 +407,8 @@
                         <th colspan="2"></th>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Was it necessary for the calendar to reschedule the event? </td>
+                        <tr ng-show="page.currentQuestion == 0">
+                            <td >Was it necessary for the calendar to reschedule the event? </td>
                             <td><select ng-model="page.data.responses.b.a">
                                 <option>Yes</option>
                                 <option>No</option>
@@ -359,7 +416,8 @@
                                 <option>I'm not sure</option>
                             </select></td>
                         </tr>
-                        <tr>
+                         
+                        <tr ng-show="page.currentQuestion == 1">
                             <td>What was the first action performed by the calendar</td>
                             <td><select ng-model="page.data.responses.b.b">
                                 <option>Confirm Attendance (of other members)</option>
@@ -368,7 +426,7 @@
                                 <option>I'm not sure</option>
                             </select></td>
                         </tr>
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 2">
                             <td>What other time was Bob free?</td>
                             <td><select ng-model="page.data.responses.b.c">
                                 <option>9am</option>
@@ -378,7 +436,7 @@
                                 <option>I'm not sure</option>
                             </select></td>
                         </tr>
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 3">
                             <td>Was the agent equipped to reschedule the event if the first proposed time was not suitable?</td>
                             <td><select ng-model="page.data.responses.b.d">
                                 <option>Yes</option>
@@ -388,7 +446,7 @@
                                 <option>I'm not sure</option>
                             </select></td>
                         </tr>
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 4">
                             <td>Did you get an understanding of how the calender made it's decisions?</td>
                             <td><select ng-model="page.data.responses.b.e">
                                 <option>Yes</option>
@@ -398,7 +456,7 @@
                             </select></td>
                         </tr>
 
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 5">
                             <td><br>
                                 <br>Would you prefer a text based justification instead of a visualisation? For instance: "I rescheduled the event to the earliest time all attendants were available"</td>
                             <td>
@@ -411,7 +469,7 @@
 
                             </td>
                         </tr>
-                        <tr>
+                        <tr ng-show="page.currentQuestion == 6">
                             <td style="padding-right:12px">Additional Comments (your thoughts on what went right, what wasn't clear, what could be improved, preferences)</td>
                             <td class="float-right">
                                 <textarea type="text"  ng-model="page.data.responses.b.g"></textarea>
@@ -423,15 +481,26 @@
                 </div>
                 <br>
                 <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <div class="links"></div><button class="btn btn-outline-primary" type="button" ng-click="page.gotoPrevQuestion()">Previous Question</button>
+                    </div>
+                    <div class="col-3" ng-hide="page.currentQuestion == 6">
+                        <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoNextQuestion()">Next Question</button>
+                    </div>
+                    <div class="col-3" ng-show="page.currentQuestion == 6">
+                        <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.submit()">Submit</button>
+                    </div>
+                </div>
+
+                <!--div class="row">
                     <div class="col-5"></div>
                     <div class="col-2">
                         <div class="links"></div><button class="btn btn-outline-primary" type="button" ng-click="page.gotoPrevPage()">Back</button>
                     </div>
-                    <div class="col-2">
-                        <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.submit()">Submit</button>
-                    </div>
+                    
                     <div class="col-5"></div>
-                </div>
+                </div-->
             </div>
         </div>
     </section>
