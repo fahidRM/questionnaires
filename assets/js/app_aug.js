@@ -66,7 +66,7 @@ angular.module('app.pages', [])
             vm.currentPage = null;
             vm.previousPage = null;
             vm.nextPage =  null;
-            vm.prolificCode = "XX-123-456";
+            vm.prolificCode = "2A5F7C98";
             vm.submitted = false;
             vm.messages = {
                 opening_remarks: {
@@ -254,6 +254,7 @@ angular.module('app.pages', [])
                     key: 'quality-a',
                     label: 'Post Study Questionnaire 1',
                     index:  14,
+                    message: "System has been used to refer to the visualisation and knowledge base",
                     mainKey: 'survey',
                     required: ['sus_1', 'sus_2', 'sus_3', 'sus_4', 'sus_5', 'sus_6', 'sus_7', 'sus_8', 'sus_9', 'sus_10']
 
@@ -263,6 +264,7 @@ angular.module('app.pages', [])
                     key: 'quality-b',
                     label: 'Post Study Questionnaire 2',
                     index:  15,
+                    message: "System has been used to refer to the visualisation and knowledge base",
                     mainKey: 'survey',
                     required: ['pssuq_1', 'pssuq_2', 'pssuq_3', 'pssuq_4', 'pssuq_5', 'pssuq_6', 'pssuq_7', 'pssuq_8', 'pssuq_9', 'pssuq_10', 'pssuq_11', 'custom_1', 'custom_2', 'custom_3', 'custom_4', 'custom_5', 'custom_6']
 
@@ -272,6 +274,7 @@ angular.module('app.pages', [])
                     label: 'Post Study Questionnaire 3',
                     index:  16,
                     mainKey: 'survey',
+                    message: "System has been used to refer to the visualisation and knowledge base",
                     required: ['change_proposal_and_why', 'keep_proposal_and_why']
 
                 }

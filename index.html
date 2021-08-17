@@ -73,6 +73,7 @@
 </nav>
 
 <main class="page cv-page">
+
   <br>
   <section class="portfolio-blockm cv">
     <div class="container">
@@ -80,6 +81,7 @@
       <div class = "work-experience group" ng-show="page.currentPage.key == 'introduction'">
         <div class="row">
           <h3 class="text-muted">{{page.messages.opening_remarks.heading}}</h3>
+
         </div>
         <br>
         <br>
@@ -88,12 +90,14 @@
             {{page.messages.opening_remarks.message}}
           </p>
         </div>
+
       </div>
 
       <!-- demographics -->
       <div class = "work-experience group" ng-show="page.currentPage.key == 'demographics'">
         <div class="row">
           <h3 class="text-muted">{{page.messages.demographics.heading}}</h3>
+
         </div>
         <br>
         <br>
@@ -378,6 +382,8 @@
           <h3 class="text-muted">{{page.currentPage.label}}</h3>
         </div>
         <br>
+        <p>{{page.currentPage.message}}</p>
+        <br>
         <div class="item">
           <table>
             <thead>
@@ -497,6 +503,8 @@
           <h3 class="text-muted">{{page.currentPage.label}}</h3>
 
         </div>
+        <br>
+        <p>{{page.currentPage.message}}</p>
         <br>
 
         <div class="item">
@@ -688,6 +696,8 @@
           <h3 class="text-muted">{{page.currentPage.label}}</h3>
 
         </div>
+        <br>
+        <p>{{page.currentPage.message}}</p>
         <br>
         <div class="item">
           <table>
