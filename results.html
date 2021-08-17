@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaire Results</title>
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <!-- chart ref: http://bl.ocks.org/mstanaland/6100713 -->
+
+    <style type="text/css">
+        svg {
+            font: 10px sans-serif;
+            shape-rendering: crispEdges;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+        }
+
+        path.domain {
+            stroke: none;
+        }
+
+        .y .tick line {
+            stroke: #ddd;
+        }
+    </style>
+
+</head>
+<body style="height: 100vh !important" ng-app="questionnaire-results-page" ng-controller="QuestionnaireResults as page" ng-init="page.init()">
+
+<!-- select datasource -->
+<section class="portfolio-block block-intro" >
+    <div class="container">
+        <div class="about-me">
+            <p>
+                Study One Results [June, 2021]
+                <br>
+                <br>
+                Demographics:
+                <br>
+            <div>
+                <canvas id="genderChart"></canvas>
+            </div>
+            <br>
+            <Br>
+
+            Likert Questionnaires
+            <br>
+            <div>
+                <i>The visualisation helps me understand how the tool works</i>
+                <canvas id="aa"></canvas>
+            </div>
+            <br>
+            <br>
+            <div>
+                <i>The visualisation of how the Agent works is satisfying</i>
+                <canvas id="ab"></canvas>
+            </div>
+            <br>
+            <br>
+            <div>
+                <i>The visualisation is sufficiently detailed</i>
+                <canvas id="ac"></canvas>
+            </div>
+            <br>
+            <br>
+            <div>
+                <i>The visualisation seems complete</i>
+                <canvas id="ad"></canvas>
+            </div>
+            <br>
+            <br>
+            <div>
+                <i>The visualisation of how the tool works tells me how to use it</i>
+                <canvas id="ae"></canvas>
+            </div>
+            <br>
+            <br>
+            <div>
+                <i>The tool was helpful in allowing me to quickly understanding the reasons for the outcome</i>
+                <canvas id="af"></canvas>
+            </div>
+            <br>
+            <br>
+            <b>Checking understanding of visualisation through practical questions</b>
+            <div>
+                <canvas id="b"></canvas>
+            </div>
+            <br>
+            <br>
+            <b>Text comments</b>
+            <ul>
+                <li ng-repeat="comment in page.comments"><span>{{comment}}</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<script src="assets/js/jquery-3.2.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="assets/js/angular.min.js"></script>
+<script src="assets/js/app3.js"></script>
+
+</body>
+</html>

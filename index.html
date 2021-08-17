@@ -2,428 +2,744 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Questionnaire </title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Questionnaire </title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link rel="stylesheet" href="assets/css/styles.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
 
-    <style>
-        .show {
-            display: block !important;
-        }
-        .hidden {
-            display: none !important;
-            visibility: hidden !important;
-        }
-    </style>
+  <style>
+
+    .padded {
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+    .bordered{
+      border: 1px solid orange;
+      margin: 10px;
+      padding: 10px;
+    }
+    .cap-at-300 {
+      max-height: 350px;
+
+    }
+    .cap-at-200 {
+      max-height: 250px;
+
+    }
+    .fit {
+      height: 300px;
+    }
+
+    .scroll-without-fit{
+
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    .show {
+      display: block !important;
+    }
+    .hidden {
+      display: none !important;
+      visibility: hidden !important;
+    }
+    .right-padded {
+      margin-right: 40px;
+    }
+
+    .wide-ta {
+      min-width: 100%;
+      min-height: 200px;
+    }
+
+    .fit-and-scroll {
+      width: inherit;
+      height: inherit !important;
+      overflow: -moz-scrollbars-vertical;
+      overflow-x: scroll;
+      overflow-y: scroll;
+      padding: 20px 20px 20px 20px;
+    }
+  </style>
 </head>
 
 <body style="height: 100vh !important" ng-app="questionnaire-page" ng-controller="QuestionnairePage as page" ng-init="page.init()">
 <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
-    <div class="container">
-        <a class="navbar-brand logo" href="#">Questionnaire</a>
-    </div>
+  <div class="container">
+    <a class="navbar-brand logo" href="#">Questionnaire</a>
+  </div>
 </nav>
 
 <main class="page cv-page">
-    <section class="portfolio-block block-intro" ng-show="page.currentPage == -1">
-        <div class="container">
-            <div class="about-me">
-                <p>
-                    Thank You!!! <br>
-                    Your response has been submitted successfully.
-                </p>
-            </div>
+  <br>
+  <section class="portfolio-blockm cv">
+    <div class="container">
+      <!-- Intro page -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'introduction'">
+        <div class="row">
+          <h3 class="text-muted">{{page.messages.opening_remarks.heading}}</h3>
         </div>
-    </section>
-    <section class="portfolio-block block-intro" ng-show="page.currentPage == 0">
-        <div class="container">
-            <div class="about-me">
-                <p>
-                    Thanks again for choosing to participate in this study.
-                    <br>
-                    <br>
-                    Instructions:
-                    <br>
-                    This study investigates the effectiveness of visual explanations and is divided in to two sections.
-                    In the first section, you are presented with a hypothetical scenario where an intelligent system
-                    acting on your behalf has performed some tasks and presented you with a visual justification.
-                    Your task is to interact with the provided justification and answer a few questions regarding its quality.
-                    <br>
-                    In the second section you'll be provided another set of visual explanations to discuss.
-                    <br><br>
-                </p>
-                <div class="links"></div><button class="btn btn-primary " type="button" ng-click="page.gotoNextPage()">Start Questionnaire</button>
-            </div>
+        <br>
+        <br>
+        <div class="item">
+          <p class="text-muted">
+            {{page.messages.opening_remarks.message}}
+          </p>
         </div>
-    </section>
-    <section class="portfolio-block cv">
-        <div class="container">
-            <div class="work-experience group" ng-show="page.currentPage == 1">
-                <div class="row">
-                    <h3 class="text-muted">Demographics</h3><br><Br>
-                </div>
-                <div class="item">
-                    <p class="text-muted">
-                        All submissions on this form are anonymous though we will need a few information about your gender, age group and educational status.
-                        <b>You may also choose to not reply by selecting the option "I'd rather not say"</b>.
-                    </p>
-                    <table>
-                        <thead>
-                        <th colspan="10"></th>
-                        <th colspan="7" ></th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td style="padding-right:7px">Gender</td>
-                            <td class="float-right"><select ng-model="page.data.demographics.gender">
-                                <option>Female</option>
-                                <option>Male</option>
-                                <option>Other</option>
-                                <option>I'd rather not say</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>Educational Qualification</td>
-                            <td class="float-right"><select ng-model="page.data.demographics.education">
-                                <option>Undergraduate</option>
-                                <option>Postgraduate</option>
-                                <option>Other</option>
-                                <option>I'd rather not say</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>Age Range</td>
-                            <td class="float-right"><select ng-model="page.data.demographics.age">
-                                <option>18 - 24</option>
-                                <option>25 - 29</option>
-                                <option>30 - 34</option>
-                                <option>35 - 39</option>
-                                <option>40 - 44</option>
-                                <option>45 - 49</option>
-                                <option>50 - 54</option>
-                                <option>55 - 59</option>
-                                <option>60 - 64</option>
-                                <option>65 - 69</option>
-                                <option>70 - 74</option>
-                                <option>75 - 79</option>
-                                <option>80 - 84</option>
-                                <option>I'd rather not say</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-right:12px">Occupation / Field of Study</td>
-                            <td class="float-right">
-                                <input type="text" ng-model="page.data.demographics.occupation">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <br>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-2">
-                            <div class="links"></div><button class="btn btn-outline-primary " type="button" ng-click="page.gotoPrevPage()">Instructions</button>
-                        </div>
-                        <div class="col-2">
-                            <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoNextPage()">Proceed</button>
-                        </div>
-                        <div class="col-4"></div>
-                    </div>
-                </div>
+      </div>
 
-            </div>
-            <div class="work-experience group" ng-show="page.currentPage == 2">
-                <div class="row">
-                    <h3 class="text-muted">Question 1</h3><br><Br>
-                </div>
-                <div class="item">
-                    <p class="text-muted">
-                        <b>Scenario:</b>&nbsp; Your employer has recently  introduced a smart calendar to help improve meeting attendance.
-                        A smart calendar may reschedule your events in advance and provides an interactive visualisation to explain its actions (as shown below).
-                        <br><br>
-                        <b>Event:&nbsp;&nbsp;</b> On Friday, you had scheduled your Monday appointments as follows:
-                        <br>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>10:00am</td>
-                            <td>-</td>
-                            <td>11:00am:</td>
-                            <td style="padding-left: 15px">Meeting with Selena &amp; Alison</td>
-                        </tr>
-                        <tr>
-                            <td>1:00pm</td>
-                            <td>-</td>
-                            <td>3:00pm:</td>
-                            <td style="padding-left: 15px">Meeting with Chelsea &amp; Derek</td>
-                        </tr>
-                        <tr>
-                            <td>4:00pm</td>
-                            <td>-</td>
-                            <td>5:00pm:</td>
-                            <td style="padding-left: 15px">Meeting with Alice &amp; Bob</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br>On Monday, your calendar had been rescheduled as follows:<br>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>9:00am</td>
-                            <td>-</td>
-                            <td>10:00am:</td>
-                            <td style="padding-left: 15px">Meeting with Alice &amp; Bob</td>
-                        </tr>
-                        <tr>
-                            <td>10:00am</td>
-                            <td>-</td>
-                            <td>11:00am:</td>
-                            <td style="padding-left: 15px">Meeting with Selena &amp; Alison</td>
-                        </tr>
-                        <tr>
-                            <td>1:00pm</td>
-                            <td>-</td>
-                            <td>3:00pm:</td>
-                            <td style="padding-left: 15px">Meeting with Chelsea &amp; Derek</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br> The justification provided by your calender is presented below:<br><br>
-                    <b>
-                        Important: The visualisation is interactive, the nodes represent actions taken by the calender.
-                        The red nodes represent actions that were not possible at the time of decision making.
-                        Clicking on a node shows the information available to the calendar at the point of its decision
-                        making (This appears on the left of the screen).<br><br>
-                    </b><br>
-                    <b>
-                        Green Nodes: When on the middle line, they represent actions your calendar performed<br>
-                        Green Nodes: When not on the middle line, they represent actions available to your calendar that were not explored.<br>
-                        Red Nodes: Represents actions options available to your calendar that could not be performed.<br>
-                        <br>
-                    </b>
-                    <div class="">
-                        <img src="assets/img/grid/1_01.png" id="q1" width="800" usemap="#img_01">
-                        <map name="img_01">
-                            <area shape="circle" coords="170,240,30" id="1_01_a" href="">
-                            <area shape="circle" coords="270,240,30" id="1_01_b" href="google.com">
-                            <area shape="circle" coords="270,340,30" id="1_01_c" href="google.com">
-                            <area shape="circle" coords="390,240,30" id="1_01_d" href="google.com">
-                            <area shape="circle" coords="520,240,30" id="1_01_e" href="google.com">
-                            <area shape="circle" coords="635,240,30" id="1_01_f" href="google.com">
-                            <area shape="circle" coords="635,340,30" id="1_01_g" href="google.com">
-                        </map>
-                    </div>
-                    <br>
-                    <Br>
-                    <table>
-                        <thead>
-                        <th colspan="5"></th>
-                        <th colspan="2"></th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>The visualisation helps me understand how the tool works</td>
-                            <td><select ng-model="page.data.responses.a.a">
-                                <option>Strongly Disagree</option>
-                                <option>Disagree</option>
-                                <option>Neutral</option>
-                                <option>Agree</option>
-                                <option>Strongly Agree</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>The visualisation of how the Agent works is satisfying</td>
-                            <td><select ng-model="page.data.responses.a.b">
-                                <option>Strongly Disagree</option>
-                                <option>Disagree</option>
-                                <option>Neutral</option>
-                                <option>Agree</option>
-                                <option>Strongly Agree</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>The visualisation is sufficiently detailed</td>
-                            <td><select ng-model="page.data.responses.a.c">
-                                <option>Strongly Disagree</option>
-                                <option>Disagree</option>
-                                <option>Neutral</option>
-                                <option>Agree</option>
-                                <option>Strongly Agree</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>The visualisation seems complete</td>
-                            <td><select ng-model="page.data.responses.a.d">
-                                <option>Strongly Disagree</option>
-                                <option>Disagree</option>
-                                <option>Neutral</option>
-                                <option>Agree</option>
-                                <option>Strongly Agree</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>The visualisation of how the tool works tells me how to use it</td>
-                            <td><select ng-model="page.data.responses.a.e">
-                                <option>Strongly Disagree</option>
-                                <option>Disagree</option>
-                                <option>Neutral</option>
-                                <option>Agree</option>
-                                <option>Strongly Agree</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>The tool was helpful in allowing me to quickly understanding the reasons for the outcome</td>
-                            <td>
-                                <select ng-model="page.data.responses.a.f">
-                                    <option>Strongly Disagree</option>
-                                    <option>Disagree</option>
-                                    <option>Neutral</option>
-                                    <option>Agree</option>
-                                    <option>Strongly Agree</option>
-                                </select>
-
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-2">
-                        <div class="links"></div><button class="btn btn-outline-primary" type="button" ng-click="page.gotoPrevPage()">Back</button>
-                    </div>
-                    <div class="col-2">
-                        <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.gotoNextPage()">Proceed</button>
-                    </div>
-                    <div class="col-4"></div>
-                </div>
-            </div>
-            <div class="work-experience group" ng-show="page.currentPage == 3">
-                <div class="row">
-                    <h3 class="text-muted"> Question 2</h3><br><Br>
-                </div>
-                <div class="item">
-                    <p class="text-muted">
-                        Using the same justification from Question 1, explore the provided justification further and answer the
-                        questions below regarding the contents of the justification.
-                    </p><b>
-                    Important: The visualisation is interactive, the nodes represent actions taken by the calender.
-                    The red nodes represent actions that were not possible at the time of decision making.
-                    Clicking on a node shows the information available to the calendar at the point of its decision
-                    making (This appears on the left of the screen).<br><br>
-                </b>
-                    <div class="row">
-                        <img src="assets/img/grid/1_01.png" id="qb" width="800" usemap="#bimg_01">
-                        <map name="bimg_01">
-                            <area shape="circle" coords="170,240,30" id="b1_01_a" href="">
-                            <area shape="circle" coords="270,240,30" id="b1_01_b" href="google.com">
-                            <area shape="circle" coords="270,340,30" id="b1_01_c" href="google.com">
-                            <area shape="circle" coords="390,240,30" id="b1_01_d" href="google.com">
-                            <area shape="circle" coords="520,240,30" id="b1_01_e" href="google.com">
-                            <area shape="circle" coords="635,240,30" id="b1_01_f" href="google.com">
-                            <area shape="circle" coords="635,340,30" id="b1_01_g" href="google.com">
-                        </map>
-
-                    </div>
-                    <br>
-                    <br>
-                    <table>
-                        <thead>
-                        <th colspan="5"></th>
-                        <th colspan="2"></th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Was it necessary for the calendar to reschedule the event? </td>
-                            <td><select ng-model="page.data.responses.b.a">
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>The justification did not say</option>
-                                <option>I'm not sure</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>What was the first action performed by the calendar</td>
-                            <td><select ng-model="page.data.responses.b.b">
-                                <option>Confirm Attendance (of other members)</option>
-                                <option>Reschedule  Event</option>
-                                <option>The justification did not say</option>
-                                <option>I'm not sure</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>What other time was Bob free?</td>
-                            <td><select ng-model="page.data.responses.b.c">
-                                <option>9am</option>
-                                <option>10am</option>
-                                <option>Neutral</option>
-                                <option>The justification did not say</option>
-                                <option>I'm not sure</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>Was the agent equipped to reschedule the event if the first proposed time was not suitable?</td>
-                            <td><select ng-model="page.data.responses.b.d">
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>Neutral</option>
-                                <option>The justification did not say</option>
-                                <option>I'm not sure</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>Did you get an understanding of how the calender made it's decisions?</td>
-                            <td><select ng-model="page.data.responses.b.e">
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>The justification was insufficient</option>
-                                <option>I'm not sure</option>
-                            </select></td>
-                        </tr>
-
-                        <tr>
-                            <td><br>
-                                <br>Would you prefer a text based justification instead of a visualisation? For instance: "I rescheduled the event to the earliest time all attendants were available"</td>
-                            <td>
-                                <br>
-                                <br>
-                                <select ng-model="page.data.responses.b.f">
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </select>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-right:12px">Additional Comments</td>
-                            <td class="float-right">
-                                <textarea type="text"  ng-model="page.data.responses.b.g"></textarea>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-5"></div>
-                    <div class="col-2">
-                        <div class="links"></div><button class="btn btn-outline-primary" type="button" ng-click="page.gotoPrevPage()">Back</button>
-                    </div>
-                    <div class="col-2">
-                        <div class="links"></div><button class="btn btn-primary" type="button" ng-click="page.submit()">Submit</button>
-                    </div>
-                    <div class="col-5"></div>
-                </div>
-            </div>
+      <!-- demographics -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'demographics'">
+        <div class="row">
+          <h3 class="text-muted">{{page.messages.demographics.heading}}</h3>
         </div>
-    </section>
+        <br>
+        <br>
+        <div class="item">
+          <p class="text-muted">
+            <b>{{page.messages.demographics.message}}</b>
+          </p>
+          <br>
+          <table>
+            <thead>
+            <th colspan="10"></th>
+            <th colspan="7" ></th>
+            </thead>
+            <tbody>
+            <tr>
+              <td style="padding-right:7px">Gender</td>
+              <td class="float-left"><select ng-model="page.results.demographics.gender">
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+                <option>I'd rather not say</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td>Educational Qualification</td>
+              <td class="float-left"><select ng-model="page.results.demographics.education">
+                <option>Undergraduate</option>
+                <option>Postgraduate</option>
+                <option>Other</option>
+                <option>I'd rather not say</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td>Age Range</td>
+              <td class="float-left"><select ng-model="page.results.demographics.age_range">
+                <option>18 - 24</option>
+                <option>25 - 29</option>
+                <option>30 - 34</option>
+                <option>35 - 39</option>
+                <option>40 - 44</option>
+                <option>45 - 49</option>
+                <option>50 - 54</option>
+                <option>55 - 59</option>
+                <option>60 - 64</option>
+                <option>65 - 69</option>
+                <option>70 - 74</option>
+                <option>75 - 79</option>
+                <option>80 - 84</option>
+                <option>I'd rather not say</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:12px">Occupation / Field of Study</td>
+              <td class="float-left">
+                <input type="text" ng-model="page.results.demographics.occupation">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-right:12px">Do you work with charts or visualisations in your day to day work?</td>
+              <td class="float-left">
+                <select ng-model="page.results.demographics.use_of_visualisation">
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>I'd rather not say</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-right:12px"><b>Prolific ID</b></td>
+              <td class="float-left">
+                <input type="text" ng-model="page.results.demographics.prolific_id">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-right:12px">What to do think transparency in Intelligent Systems (i.e. AI) is?</td>
+              <td class="float-left">
+                <textarea  ng-model="page.results.demographics.transparency"> </textarea>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Instructions Page -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'instructions'">
+        <div class="row">
+          <h3 class="text-muted">{{page.messages.instructions.heading}}</h3>
+
+        </div>
+        <div class="item padded">
+          <b class="text-danger">{{page.messages.instructions.warning}}</b>
+          <p class="text-muted">
+            {{page.messages.instructions.message}}<br><br>
+            {{page.messages.instructions.message_b}}<br><br>
+            {{page.messages.instructions.message_c}}
+          </p>
+        </div>
+      </div>
+
+      <!-- task page -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'task-1-a' || page.currentPage.key == 'task-1-b'|| page.currentPage.key == 'task-1-c' || page.currentPage.key == 'task-2-a' || page.currentPage.key == 'task-2-b' || page.currentPage.key == 'task-2-c' || page.currentPage.key == 'task-3-a' || page.currentPage.key == 'task-3-b' || page.currentPage.key == 'task-3-c'">
+        <div class="row">
+          <h3 class="text-muted">{{page.currentPage.label}}</h3>
+        </div>
+        <br>
+        <div class="item">
+          <!-- Graph here -->
+          <b class="text-danger">
+            knowledge-base can be scrolled vertically (up/down). Visualisation can be scrolled horizontally (left/right)
+            <Br> Nodes (green and red) can be interacted with for additional information.</b>
+          <br>
+          <div class="row cap-at-300 bordered">
+            <div class="col-md-4 scroll-without-fit cap-at-300">
+              <nav class="nav-group ">
+                <span class="nav-group-title">Knowledge Base</span>
+                <ul class="list-group cap-at-200">
+                  <li class="list-group-header">
+                    <input class="form-control" type="text"
+                           ng-model="page.searchString"
+                           ng-change="page.searchKnowledgeBase()"
+                           placeholder="search knowledge-base (case sensitive)">
+                  </li>
+                  <li class="list-group-item list-group-item-b"
+                      ng-repeat="belief in page.filteredKnowledgeBase"
+                      ng-mouseover="page.displayFullSensorReading(belief)"
+                      ng-mouseleave="page.hideFullSensorReading()">
+
+                    <div class="media-body">
+                      <strong>{{belief.value}}</strong>
+                      <p>{{belief.source}}</p>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-md-8">
+              <div class="pane fit" id="view_region">
+                <div id="visualisation_board" class="fit-and-scroll"></div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <table>
+            <thead>
+            <th colspan="10"></th>
+            <th colspan="7" ></th>
+            </thead>
+            <tbody>
+            <tr ng-if="page.currentPage.key == 'task-1-a'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.one_a" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-1-b'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.one_b" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-1-c'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.one_c" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-2-a'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.two_a" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-2-b'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.two_b" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-2-c'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.two_c" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-3-a'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.three_a" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-3-b'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.three_b" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+            <tr ng-if="page.currentPage.key == 'task-3-c'">
+              <td style="padding-right:7px">{{page.currentPage.question}}</td>
+              <td class="float-left">
+                <select ng-model="page.results.tasks.three_c" ng-options="item as item for item in page.currentPage.options"></select>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- Scenario Page -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'scenario'">
+        <div class="row">
+          <h3 class="text-muted">{{page.messages.scenario.heading}}</h3>
+        </div>
+        <br>
+        <br>
+        <div class="item">
+          <p class="text-muted">
+            {{page.messages.scenario.message}}
+            <br><br>
+            <b>Event:&nbsp;&nbsp;</b> {{page.messages.scenario.message_b}}
+            <br>
+            <table>
+              <tbody>
+              <tr ng-repeat="entry in page.messages.scenario.list">
+                <td>{{entry.start}}</td>
+                <td>-</td>
+                <td>{{entry.end}}:</td>
+                <td style="padding-left: 15px">{{entry.note}}</td>
+              </tr>
+              </tbody>
+            </table>
+          <br>{{page.messages.scenario.message_c}}:<br><br>
+          <table>
+            <tbody>
+            <tr ng-repeat="entry in page.messages.scenario.list_b">
+              <td>{{entry.start}}</td>
+              <td>-</td>
+              <td>{{entry.end}}:</td>
+              <td style="padding-left: 15px">{{entry.note}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <br> {{page.messages.scenario.message_d}}:<br><br>
+          <b>
+            Important: The visualisation is interactive, the nodes represent actions taken by the calender.
+            The red nodes represent actions that were not possible at the time of decision making.
+            Clicking on a node shows the information available to the calendar at the point of its decision
+            making (This appears on the left of the screen).<br><br>
+          </b><br>
+          <b>
+            Green Nodes: When on the middle line, they represent actions your calendar performed<br>
+            Green Nodes: When not on the middle line, they represent actions available to your calendar that were not explored.<br>
+            Red Nodes: Represents actions options available to your calendar that could not be performed.<br>
+            <br>
+          </b>
+          </p>
+        </div>
+      </div>
+
+      <!-- Think aloud task -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'think-aloud'">
+        <div class="row">
+          <h3 class="text-muted">{{page.messages.think_aloud.heading}}</h3>
+
+        </div>
+        <br>
+        <div class="item">
+          <b class="text-danger">{{page.messages.think_aloud.warning}}</b><br><br>
+          <p class="text-muted">
+            {{page.messages.think_aloud.message}}<br><br>
+          </p>
+          <textarea col-span="400" class="wide-ta" ng-model="page.results.think_aloud.summary"></textarea>
+        </div>
+      </div>
+
+
+      <!-- Quality of visualisation -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'quality-a'">
+        <div class="row">
+          <h3 class="text-muted">{{page.currentPage.label}}</h3>
+        </div>
+        <br>
+        <div class="item">
+          <table>
+            <thead>
+            <th colspan="10"></th>
+            <th colspan="7" ></th>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding-right:7px">I think that I would like to use this system frequently</td>
+                <td><select ng-model="page.results.survey.sus_1">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I found the system unnecessarily complex</td>
+                <td><select ng-model="page.results.survey.sus_2">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I thought the system was easy to use</td>
+                <td><select ng-model="page.results.survey.sus_3">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I think I would need the support of a technical person to be able to use this system</td>
+                <td><select ng-model="page.results.survey.sus_4">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I found the various functions in the system were well integrated</td>
+                <td><select ng-model="page.results.survey.sus_5">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I thought there was too much inconsistency in the system</td>
+                <td><select ng-model="page.results.survey.sus_6">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I would imagine that most people would learn how to use this system very quickly</td>
+                <td><select ng-model="page.results.survey.sus_7">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I found the system very awkward to use</td>
+                <td><select ng-model="page.results.survey.sus_8">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I felt very confident using the system</td>
+                <td><select ng-model="page.results.survey.sus_9">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td style="padding-right:7px">I needed to learn a lot of things before I could get going with this system</td>
+                <td><select ng-model="page.results.survey.sus_10">
+                  <option>Strongly Disagree</option>
+                  <option>Disagree</option>
+                  <option>Neutral</option>
+                  <option>Agree</option>
+                  <option>Strongly Agree</option>
+                </select></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <Br>
+      </div>
+
+      <!-- Quality of visualisation -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'quality-b'">
+        <div class="row">
+          <h3 class="text-muted">{{page.currentPage.label}}</h3>
+
+        </div>
+        <br>
+
+        <div class="item">
+          <table>
+            <thead>
+            <th colspan="10"></th>
+            <th colspan="7" ></th>
+            </thead>
+            <tbody>
+            <tr>
+              <td style="padding-right:7px">Overall, I am happy with how easy it is to use the system</td>
+              <td><select ng-model="page.results.survey.pssuq_1">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">It was simple to use this system</td>
+              <td><select ng-model="page.results.survey.pssuq_2">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">I was able to complete the tasks and scenarios quickly using this system</td>
+              <td><select ng-model="page.results.survey.pssuq_3">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">I felt comfortable using this system</td>
+              <td><select ng-model="page.results.survey.pssuq_4">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">It was easy to learn and use this system</td>
+              <td><select ng-model="page.results.survey.pssuq_5">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">It was easy to find information I needed</td>
+              <td><select ng-model="page.results.survey.pssuq_6">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The organisation of the information on the visualisation was clear </td>
+              <td><select ng-model="page.results.survey.pssuq_7">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The visualisation was pleasant</td>
+              <td><select ng-model="page.results.survey.pssuq_8">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">I liked using the visualisation</td>
+              <td><select ng-model="page.results.survey.pssuq_9">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The system has all the functions and capabilities I expect it to have</td>
+              <td><select ng-model="page.results.survey.pssuq_10">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">Overall, I am satisfied with this system</td>
+              <td><select ng-model="page.results.survey.pssuq_11">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The visualisation helped me understand how the Smart Calender works</td>
+              <td><select ng-model="page.results.survey.custom_1">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The visualisation was sufficiently detailed</td>
+              <td><select ng-model="page.results.survey.custom_2">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The visualisation seemed complete</td>
+              <td><select ng-model="page.results.survey.custom_3">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The visualisation told me how the smart calender works</td>
+              <td><select ng-model="page.results.survey.custom_4">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">The visualisation was helpful in allowing me to quickly understand the reason for an outcome</td>
+              <td><select ng-model="page.results.survey.custom_5">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td style="padding-right:7px">I prefer a text based explanation</td>
+              <td><select ng-model="page.results.survey.custom_6">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+              </select></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+      </div>
+
+      <!-- Quality of visualisation -->
+      <div class = "work-experience group" ng-show="page.currentPage.key == 'quality-c' && ! page.submitted">
+        <div class="row">
+          <h3 class="text-muted">{{page.currentPage.label}}</h3>
+
+        </div>
+        <br>
+        <div class="item">
+          <table>
+            <thead>
+            <th colspan="10"></th>
+            <th colspan="7" ></th>
+            </thead>
+            <tbody>
+            <tr>
+              <td style="padding-right:12px">What improvement would you like to see in the visualisation and how did the visaulisation not support that?</td>
+              <td class="float-left">
+                <textarea  ng-model="page.results.survey.change_proposal_and_why"> </textarea>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-right:12px">What would you like to preserve in the visualisation?</td>
+              <td class="float-left">
+                <textarea  ng-model="page.results.survey.keep_proposal_and_why"> </textarea>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- On submit page -->
+      <div class = "work-experience group"  ng-show="page.submitted">
+        <div class="row">
+          <h3 class="text-info">{{page.messages.closing_remarks.heading}}</h3>
+        </div>
+        <br>
+        <div class="item">
+          {{page.messages.closing_remarks.message}}
+          <br>
+          <br>
+          <br>
+          <b>PROLIFIC COMPLETION CODE:  {{page.prolificCode}}</b>
+        </div>
+      </div>
+
+      <div class = "work-experience group" ng-hide="page.submitted">
+        <div class="float-right">
+          <button ng-if="page.canNavBack" class="btn btn-outline-primary right-padded" ng-click="page.gotoPreviousPage()"> < Back [{{page.previousPage.label}}] </button>
+          <button ng-if="page.canNavForward" class="btn btn-outline-primary" ng-click="page.gotoNextPage()">Next [{{page.nextPage.label}}] > </button>
+          <button ng-if="! page.canNavForward" class="btn btn-success" ng-click="page.submit()"> Submit </button>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
 
 
 </main>
@@ -445,88 +761,14 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
 
-
+<script src="assets/js/d3.min.js"></script>
+<script src="assets/js/lodash.min.js"></script>
 <script src="assets/js/angular.min.js"></script>
-<script src="assets/js/app.js"></script>
-<script>
+<script src="assets/js/app_aug.js"></script>
+<script src="assets/js/trace-store.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/transparency-dashboard.js"></script>
 
-    $("#1_01_a").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_01.png");
-        return false;
-    });
-
-
-    $("#1_01_b").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_02.png");
-        return false;
-    });
-
-
-    $("#1_01_c").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_02.png");
-        return false;
-    });
-
-    $("#1_01_d").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_03.png");
-        return false;
-    });
-
-    $("#1_01_e").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_04.png");
-        return false;
-    });
-
-    $("#1_01_f").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_05.png");
-        return false;
-    });
-
-    $("#1_01_g").on("click",  function() {
-        $("#q1").attr("src", "assets/img/grid/1_05.png");
-        return false;
-    });
-
-
-    $("#b1_01_a").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_01.png");
-        return false;
-    });
-
-
-    $("#b1_01_b").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_02.png");
-        return false;
-    });
-
-
-    $("#b1_01_c").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_02.png");
-        return false;
-    });
-
-    $("#b1_01_d").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_03.png");
-        return false;
-    });
-
-    $("#b1_01_e").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_04.png");
-        return false;
-    });
-
-    $("#b1_01_f").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_05.png");
-        return false;
-    });
-
-    $("#b1_01_g").on("click",  function() {
-        $("#qb").attr("src", "assets/img/grid/1_05.png");
-        return false;
-    });
-
-
-</script>
 
 </body>
 
